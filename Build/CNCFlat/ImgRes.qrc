@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/cncFlat_small.png</file>
+        <file>img/cautionBack.png</file>
+        <file>img/play.png</file>
+        <file>img/stop.png</file>
+        <file>img/cncAxis.png</file>
+    </qresource>
+</RCC>
