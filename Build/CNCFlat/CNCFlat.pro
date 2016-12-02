@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     AxisDialog.cpp \
     CNCRoutine.cpp \
     RoutingDialog.cpp \
-    PixelDialog.cpp
+    PixelDialog.cpp \
+    UserProfile.cpp
 
 HEADERS  += MainWindow.h \
     DisclaimerDialog.h \
     AxisDialog.h \
     CNCRoutine.h \
     RoutingDialog.h \
-    PixelDialog.h
+    PixelDialog.h \
+    UserProfile.h
 
 FORMS    += MainWindow.ui \
     DisclaimerDialog.ui \

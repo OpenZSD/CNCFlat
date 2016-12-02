@@ -5,5 +5,6 @@ Author: Jerry Z.
 
 ToDo:
 -Complete UIs
--Complete image processing
+-Complete image proccessing
 -Complete and test emergency stop
+-Add setup scripts
