@@ -3,8 +3,16 @@ Linux based CNC program for GRBL based systems.
 
 Author: Jerry Z.
 
+Completed:
+-Template generator
+
 ToDo:
--Complete UIs
--Complete image proccessing
--Complete and test emergency stop
--Add setup scripts
+-Short Term:
+   -Address warning dialogs
+   -Complete profile values
+   -System check of values
+-General:
+   -Complete UIs
+   -Complete image proccessing
+   -Complete and test emergency stop
+   -Add setup scripts
