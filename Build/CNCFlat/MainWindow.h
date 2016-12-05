@@ -3,9 +3,12 @@
 
 #include <QMainWindow>
 
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
+
+class CNCRoutine;
 
 class MainWindow : public QMainWindow
 {
@@ -15,8 +18,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void generateTemplate();
+
 private:
     Ui::MainWindow *ui;
+    CNCRoutine *mRoutine;
 };
 
 #endif // MAINWINDOW_H

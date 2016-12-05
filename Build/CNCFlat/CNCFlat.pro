@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     CNCRoutine.cpp \
     RoutingDialog.cpp \
     PixelDialog.cpp \
-    UserProfile.cpp
+    UserProfile.cpp \
+    TemplateMaker.cpp \
+    SizeDialog.cpp
 
 HEADERS  += MainWindow.h \
     DisclaimerDialog.h \
@@ -27,13 +29,18 @@ HEADERS  += MainWindow.h \
     CNCRoutine.h \
     RoutingDialog.h \
     PixelDialog.h \
-    UserProfile.h
+    UserProfile.h \
+    TemplateMaker.h \
+    SizeDialog.h \
+    UIUtil.h \
+    CNCConstants.h
 
 FORMS    += MainWindow.ui \
     DisclaimerDialog.ui \
     AxisDialog.ui \
     RoutingDialog.ui \
-    PixelDialog.ui
+    PixelDialog.ui \
+    SizeDialog.ui
 
 RESOURCES += \
     ImgRes.qrc

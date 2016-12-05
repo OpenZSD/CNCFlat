@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QPixmap>
 
+class MainWindow;
+
 class CNCRoutine : public QObject
 {
     Q_OBJECT
@@ -16,17 +18,22 @@ protected:
     };
 
 public:
-    CNCRoutine();
+    CNCRoutine(MainWindow *mainWindow);
+
+    void setupTemplate();
+
+
+
     void setAxis(unsigned int x, unsigned int y, unsigned int z, bool invH, bool invV, bool invD);
     void setSpeed(double travelSpeed, double cutSpeed);
     void setDepth(double etch, double cut);
     void setHeight(double hover, double clearance);
 
-//protected:
-
-
 signals:
     void setPixmap(const QPixmap &p);
+
+private:
+    MainWindow *mMainWindow;
 };
 
 #endif // CNCROUTINE_H
