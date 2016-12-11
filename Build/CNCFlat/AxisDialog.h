@@ -3,8 +3,9 @@
 
 #include <QDialog>
 
-namespace Ui {
-class AxisDialog;
+namespace Ui
+{
+    class AxisDialog;
 }
 
 class AxisDialog : public QDialog

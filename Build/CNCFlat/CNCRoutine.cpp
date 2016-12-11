@@ -18,7 +18,6 @@ CNCRoutine::CNCRoutine(MainWindow *mainWindow)
 
 void CNCRoutine::setupTemplate()
 {
-    //MIN_TEMPLATE_WIDTH
     SizeDialog sd(MIN_TEMPLATE_WIDTH, MIN_TEMPLATE_HEIGHT, mMainWindow);
     QString path;
 

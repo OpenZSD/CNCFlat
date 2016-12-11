@@ -3,8 +3,9 @@
 
 #include <QDialog>
 
-namespace Ui {
-class PixelDialog;
+namespace Ui
+{
+    class PixelDialog;
 }
 
 class PixelDialog : public QDialog

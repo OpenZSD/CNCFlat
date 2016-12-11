@@ -3,8 +3,9 @@
 
 #include <QDialog>
 
-namespace Ui {
-class RoutingDialog;
+namespace Ui
+{
+    class RoutingDialog;
 }
 
 class RoutingDialog : public QDialog

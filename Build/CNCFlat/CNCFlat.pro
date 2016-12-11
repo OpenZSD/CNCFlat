@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     PixelDialog.cpp \
     UserProfile.cpp \
     TemplateMaker.cpp \
-    SizeDialog.cpp
+    SizeDialog.cpp \
+    MessageDialog.cpp
 
 HEADERS  += MainWindow.h \
     DisclaimerDialog.h \
@@ -33,14 +34,18 @@ HEADERS  += MainWindow.h \
     TemplateMaker.h \
     SizeDialog.h \
     UIUtil.h \
-    CNCConstants.h
+    CNCConstants.h \
+    MessageDialog.h
 
 FORMS    += MainWindow.ui \
     DisclaimerDialog.ui \
     AxisDialog.ui \
     RoutingDialog.ui \
     PixelDialog.ui \
-    SizeDialog.ui
+    SizeDialog.ui \
+    MessageDialog.ui \
+    MDIFileErr.ui \
+    MDIFormatErr.ui
 
 RESOURCES += \
     ImgRes.qrc

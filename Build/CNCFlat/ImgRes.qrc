@@ -5,5 +5,6 @@
         <file>img/play.png</file>
         <file>img/stop.png</file>
         <file>img/cncAxis.png</file>
+        <file>img/CFFileErr.png</file>
     </qresource>
 </RCC>
