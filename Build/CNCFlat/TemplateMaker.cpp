@@ -7,6 +7,7 @@
 QImage TemplateMaker::genImg(unsigned long w, unsigned h)
 {
     QImage tmpl(w, h, QImage::Format_RGB32); //, QImage::Format_Indexed8
+    QImage result;
     QVector<QRgb> table(8);
     QStringList labels;
     Qt::Alignment al = Qt::AlignVCenter | Qt::AlignHCenter;
@@ -37,6 +38,7 @@ QImage TemplateMaker::genImg(unsigned long w, unsigned h)
     }
 
     paint.drawLine(0,31,w,31);
-
-    return tmpl.convertToFormat(QImage::Format_Indexed8);
+    result = tmpl.convertToFormat(QImage::Format_Indexed8);
+    result.setColorTable(table);
+    return result;
 }

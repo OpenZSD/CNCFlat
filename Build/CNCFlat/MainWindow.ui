@@ -241,7 +241,7 @@
     <addaction name="actionAdjust_Axis"/>
     <addaction name="actionGRBL_Terminal"/>
     <addaction name="separator"/>
-    <addaction name="action_Open_PNG_Routing_Image"/>
+    <addaction name="action_Open_Routing_Image"/>
     <addaction name="actionAdjust_Image_Settings"/>
     <addaction name="separator"/>
     <addaction name="actionAbout_CNC_Flat"/>
@@ -272,7 +272,7 @@
     <string>GRBL &amp;Terminal</string>
    </property>
   </action>
-  <action name="action_Open_PNG_Routing_Image">
+  <action name="action_Open_Routing_Image">
    <property name="text">
     <string>&amp;Open BMP Routing Image</string>
    </property>
@@ -314,8 +314,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_Open_Routing_Image</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>openImg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>343</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>generateTemplate()</slot>
+  <slot>openImg()</slot>
  </slots>
 </ui>

@@ -6,6 +6,15 @@
 #include <QProcess>
 #include <QProcessEnvironment>
 
+#define CHECKV(x)
+
+bool retF() {  printf("This is a check\n");  return false; }
+
+void check(bool x)
+{
+
+}
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -16,6 +25,10 @@ int main(int argc, char *argv[])
     {
         w.show();
     }
+
+
+    CHECKV(retF())
+
 /*
     QString userName = QProcessEnvironment::systemEnvironment().value("USER");
     QString path = QString("/home/")+userName+QString("/.test");

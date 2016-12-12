@@ -21,7 +21,7 @@ public:
     CNCRoutine(MainWindow *mainWindow);
 
     void setupTemplate();
-
+    void loadImg();
 
 
     void setAxis(unsigned int x, unsigned int y, unsigned int z, bool invH, bool invV, bool invD);

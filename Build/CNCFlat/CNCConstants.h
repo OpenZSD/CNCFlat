@@ -5,6 +5,8 @@
 #define MIN_TEMPLATE_HEIGHT 32
 #define TEMPLATE_KEY_HEIGHT 32
 #define MIN_NET_T_HEIGHT 64
+#define IMG_MAX_CLR_TBL 8
+#define IMG_MIN_CLR_TBL 3
 
 
 #endif // CNCCONSTANTS_H

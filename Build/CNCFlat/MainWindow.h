@@ -20,6 +20,7 @@ public:
 
 public slots:
     void generateTemplate();
+    void openImg();
 
 private:
     Ui::MainWindow *ui;

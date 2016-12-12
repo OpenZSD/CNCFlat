@@ -35,8 +35,11 @@ public:
     int show(MessageType type, QStringList &args);
     ~MessageDialog();
 
+protected:
+
 private:
     Ui::MessageDialog *ui;
+    QObject *mForm;
 };
 
 #endif // MESSAGEDIALOG_H

@@ -21,3 +21,8 @@ void MainWindow::generateTemplate()
 {
     mRoutine->setupTemplate();
 }
+
+void MainWindow::openImg()
+{
+    mRoutine->loadImg();
+}

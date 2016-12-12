@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     UserProfile.cpp \
     TemplateMaker.cpp \
     SizeDialog.cpp \
-    MessageDialog.cpp
+    MessageDialog.cpp \
+    QAUtil.cpp
 
 HEADERS  += MainWindow.h \
     DisclaimerDialog.h \
@@ -35,7 +36,8 @@ HEADERS  += MainWindow.h \
     SizeDialog.h \
     UIUtil.h \
     CNCConstants.h \
-    MessageDialog.h
+    MessageDialog.h \
+    QAUtil.h
 
 FORMS    += MainWindow.ui \
     DisclaimerDialog.ui \
