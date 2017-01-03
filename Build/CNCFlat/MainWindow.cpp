@@ -9,20 +9,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     mRoutine = new CNCRoutine(this);
+    mMsg = new MessageDialog(this);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete mRoutine;
+    delete mMsg;
 }
 
-void MainWindow::generateTemplate()
-{
-    mRoutine->setupTemplate();
-}
-
-void MainWindow::openImg()
-{
-    mRoutine->loadImg();
-}
+void MainWindow::generateTemplate() { mRoutine->setupTemplate(); }
+void MainWindow::openImg() { mRoutine->loadImg(); }

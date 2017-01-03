@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>288</width>
-    <height>175</height>
+    <height>229</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QDoubleSpinBox" name="doubleSpinBox">
+       <widget class="QDoubleSpinBox" name="uiSBRouteW">
         <property name="minimum">
          <double>0.010000000000000</double>
         </property>
@@ -53,24 +53,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
-        <property name="minimum">
-         <double>0.010000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.010000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Routing width:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+       <widget class="QDoubleSpinBox" name="uiSBCutD">
         <property name="minimum">
          <double>0.010000000000000</double>
         </property>
@@ -86,6 +69,13 @@
         </property>
        </widget>
       </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Routing width:</string>
+        </property>
+       </widget>
+      </item>
       <item row="2" column="2">
        <widget class="QLabel" name="label_6">
         <property name="text">
@@ -93,8 +83,25 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QSpinBox" name="spinBox">
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="uiSBEtchD">
+        <property name="minimum">
+         <double>0.010000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.010000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Motor RPM:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="uiSBRPM">
         <property name="minimum">
          <number>1</number>
         </property>
@@ -107,11 +114,14 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QLabel" name="label_7">
+       <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>Motor RPM:</string>
+         <string>Cut in passes:</string>
         </property>
        </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="uiSBCPasses"/>
       </item>
      </layout>
     </widget>

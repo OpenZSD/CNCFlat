@@ -5,6 +5,7 @@
 #include <QPixmap>
 
 class MainWindow;
+class MessageDialog;
 
 class CNCRoutine : public QObject
 {
@@ -34,6 +35,7 @@ signals:
 
 private:
     MainWindow *mMainWindow;
+    MessageDialog *mMD;
 };
 
 #endif // CNCROUTINE_H

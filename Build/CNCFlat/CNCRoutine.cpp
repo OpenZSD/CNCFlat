@@ -4,6 +4,7 @@
 #include "MainWindow.h"
 #include "SizeDialog.h"
 #include "TemplateMaker.h"
+#include "MessageDialog.h"
 #include <QImage>
 #include <QFileDialog>
 #include <stdio.h>
@@ -12,7 +13,7 @@
 CNCRoutine::CNCRoutine(MainWindow *mainWindow)
     :QObject(), mMainWindow(mainWindow)
 {
-
+    mMD = new MessageDialog(mainWindow);
 }
 
 void CNCRoutine::setupTemplate()
@@ -53,7 +54,7 @@ void CNCRoutine::loadImg()
 
         if((img.colorCount() < IMG_MIN_CLR_TBL) || (img.colorCount() > IMG_MAX_CLR_TBL))
         {
-            printf("BAD FORMAT %d\n", img.colorTable().size());
+            mMD->show(MessageDialog::ErrFormat);
         }
         else
         {

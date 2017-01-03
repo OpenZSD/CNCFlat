@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "MessageDialog.h"
 
 namespace Ui
 {
@@ -18,6 +19,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    int showMessage(MessageDialog::MessageType type, QStringList args = QStringList()) { return mMsg->show(type, args); }
+
 public slots:
     void generateTemplate();
     void openImg();
@@ -25,6 +28,7 @@ public slots:
 private:
     Ui::MainWindow *ui;
     CNCRoutine *mRoutine;
+    MessageDialog *mMsg;
 };
 
 #endif // MAINWINDOW_H

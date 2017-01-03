@@ -1,4 +1,5 @@
 #include "TemplateMaker.h"
+#include "CNCConstants.h"
 #include <QVector>
 #include <QColor>
 #include <QPainter>
@@ -8,7 +9,7 @@ QImage TemplateMaker::genImg(unsigned long w, unsigned h)
 {
     QImage tmpl(w, h, QImage::Format_RGB32); //, QImage::Format_Indexed8
     QImage result;
-    QVector<QRgb> table(8);
+    QVector<QRgb> table(IMG_MAX_CLR_TBL);
     QStringList labels;
     Qt::Alignment al = Qt::AlignVCenter | Qt::AlignHCenter;
 
@@ -29,7 +30,7 @@ QImage TemplateMaker::genImg(unsigned long w, unsigned h)
     tmpl.setColorTable(table);
 
     paint.fillRect(0,0,w,h, QColor(table[0]));
-    for(int i = 0; i < 8; i++)
+    for(int i = 0; i < IMG_MAX_CLR_TBL; i++)
     {
         paint.fillRect(x,0,64,16, QColor(table[i]));
         paint.setPen(QColor(table[1]));

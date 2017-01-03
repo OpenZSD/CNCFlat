@@ -95,9 +95,6 @@
                 <height>16777215</height>
                </size>
               </property>
-              <property name="currentText">
-               <string>X</string>
-              </property>
               <item>
                <property name="text">
                 <string>X</string>
