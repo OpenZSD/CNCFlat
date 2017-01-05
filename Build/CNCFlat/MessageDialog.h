@@ -3,6 +3,9 @@
 
 #include <QDialog>
 #include <QStringList>
+#include "ui_MDIFormatErr.h"
+#include "ui_MDIFileErr.h"
+#include "ui_MDICenterWrn.h"
 
 namespace Ui
 {
@@ -20,16 +23,13 @@ public:
     {
         ErrFileAccess,
         ErrFormat,
-        ErrBadSize,
         ErrPalletConflict,
-        ErrPalletSize,
         WrnPalletSize,
         WrnCenterConflict,
         ConfirmParam,
         WrnMsg,
         Msg
     };
-
 
     explicit MessageDialog(QWidget *parent = 0);
     int show(MessageType type, QStringList args = QStringList());
@@ -42,9 +42,12 @@ protected:
 
 private:
     Ui::MessageDialog *ui;
-    QObject *mForm;
     QWidget *mBase;
     QDialogButtonBox *mBtns;
+
+    Ui::mdiFileErr mFileErr;
+    Ui::mdiFormatErr mFormatErr;
+    Ui::mdiCenterWrn mCenterWrn;
 };
 
 #endif // MESSAGEDIALOG_H

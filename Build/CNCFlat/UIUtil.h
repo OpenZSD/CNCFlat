@@ -5,7 +5,7 @@
 
 #include <QString>
 #include <QWidget>
-#include <QMessageBox>
+
 
 class QWidget;
 
@@ -13,18 +13,21 @@ namespace UIUtil
 {
    using namespace std;
 
+   void errMsgAndTerm(QWidget *root, QString msg);
+
    template <class T> T *findAndAssert(QString id, QWidget *root)
    {
       T *w = root->findChild<T *>(id);
 
       if(!w)
       {
-         QMessageBox::critical(root , QString("Critical Application Error"), QString("Missing UI element: ") + id);
-         exit(EXIT_FAILURE);
+          //application ends here
+          errMsgAndTerm(root, QString("Missing UI element: ") + id);
       }
 
       return w;
    }
+
 }
 
 #endif // UIUTIL_H

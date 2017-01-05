@@ -2,14 +2,15 @@
 #include "ui_MessageDialog.h"
 #include "ui_MDIFormatErr.h"
 #include "ui_MDIFileErr.h"
+#include "ui_MDICenterWrn.h"
 #include "UIUtil.h"
 #include <QDialogButtonBox>
 #include <QMessageBox>
+#include <stdio.h>
 
 MessageDialog::MessageDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::MessageDialog),
-    mForm(0)
+    ui(new Ui::MessageDialog)
 {
     ui->setupUi(this);
     mBtns = UIUtil::findAndAssert<QDialogButtonBox>("uiButtonBox", this);
@@ -34,36 +35,23 @@ void MessageDialog::wipeBox()
     //destroy old canvas
     delete UIUtil::findAndAssert<QWidget>("uiWCanvas", mBase);
 
-    if(mForm != 0)
-    {
-        delete mForm;
-        mForm = 0;
-    }
-
     //add empty "cavas"
     (new QWidget(mBase))->setObjectName("uiWCanvas");
 }
 
 void MessageDialog::populateBox(MessageType box)
 {
-    //TODO: add critical assert mForm == 0
-
-    Ui::mdiFileErr *tmpFileErr = 0;
-    Ui::mdiFormatErr *tmpFormatErr = 0;
-
     switch(box)
     {
-    case ErrBadSize:
-        break;
     case ErrFileAccess:
         break;
     case ErrPalletConflict:
         break;
-    case ErrPalletSize:
-        break;
     case WrnPalletSize:
         break;
     case WrnCenterConflict:
+        mCenterWrn.setupUi(UIUtil::findAndAssert<QWidget>("uiWCanvas", mBase));
+        this->setFixedSize(335, 135);
         break;
     case ConfirmParam:
         break;
@@ -72,35 +60,44 @@ void MessageDialog::populateBox(MessageType box)
     case Msg:
         break;
     default: //ErrFormat //480 230  +35
-        mForm = (QObject *)(tmpFormatErr = new Ui::mdiFormatErr());
-        tmpFormatErr->setupUi(UIUtil::findAndAssert<QWidget>("uiWCanvas", mBase));
-        this->setFixedSize(480, 265);
+        mFormatErr.setupUi(UIUtil::findAndAssert<QWidget>("uiWCanvas", mBase));
+        this->setFixedSize(500, 265);
     }
+
+    mBtns->clear();
 }
 
 void MessageDialog::fillFields(MessageType type, QStringList &args)
 {
     switch(type)
     {
-    case ErrBadSize:
-        break;
     case ErrFileAccess:
+        mBtns->addButton(QDialogButtonBox::Ok);
         break;
     case ErrPalletConflict:
-        break;
-    case ErrPalletSize:
+        mBtns->addButton(QDialogButtonBox::Ok);
         break;
     case WrnPalletSize:
         break;
     case WrnCenterConflict:
+        mBtns->addButton(QDialogButtonBox::Yes);
+        mBtns->addButton(QDialogButtonBox::Cancel);
         break;
     case ConfirmParam:
+        mBtns->addButton(QDialogButtonBox::Ok);
+        mBtns->addButton(QDialogButtonBox::Cancel);
         break;
     case WrnMsg:
+        mBtns->addButton(QDialogButtonBox::Ok);
+        mBtns->addButton(QDialogButtonBox::Cancel);
         break;
     case Msg:
+        mBtns->addButton(QDialogButtonBox::Ok);
+        mBtns->addButton(QDialogButtonBox::Yes);
+        mBtns->addButton(QDialogButtonBox::No);
         break;
     default: //ErrFormat
+        mBtns->addButton(QDialogButtonBox::Ok);
         break;
     }
 

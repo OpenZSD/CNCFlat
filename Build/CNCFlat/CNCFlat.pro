@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QMAKE_CXXFLAGS += -std=c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,7 +24,8 @@ SOURCES += main.cpp\
     TemplateMaker.cpp \
     SizeDialog.cpp \
     MessageDialog.cpp \
-    QAUtil.cpp
+    QAUtil.cpp \
+    UIUtil.cpp
 
 HEADERS  += MainWindow.h \
     DisclaimerDialog.h \
@@ -37,7 +39,8 @@ HEADERS  += MainWindow.h \
     UIUtil.h \
     CNCConstants.h \
     MessageDialog.h \
-    QAUtil.h
+    QAUtil.h \
+    ITestReporter.h
 
 FORMS    += MainWindow.ui \
     DisclaimerDialog.ui \
@@ -47,7 +50,8 @@ FORMS    += MainWindow.ui \
     SizeDialog.ui \
     MessageDialog.ui \
     MDIFileErr.ui \
-    MDIFormatErr.ui
+    MDIFormatErr.ui \
+    MDICenterWrn.ui
 
 RESOURCES += \
     ImgRes.qrc

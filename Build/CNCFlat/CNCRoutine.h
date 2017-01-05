@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include <QPixmap>
+#include <QImage>
+#include <QColor>
+#include "CNCConstants.h"
 
 class MainWindow;
 class MessageDialog;
@@ -23,7 +26,9 @@ public:
 
     void setupTemplate();
     void loadImg();
-
+    void loadColorTable(QImage &img);
+    bool checkColorTable();
+    bool getCenter(QImage &img, FlatPt &center);
 
     void setAxis(unsigned int x, unsigned int y, unsigned int z, bool invH, bool invV, bool invD);
     void setSpeed(double travelSpeed, double cutSpeed);
@@ -36,6 +41,11 @@ signals:
 private:
     MainWindow *mMainWindow;
     MessageDialog *mMD;
+    QColor mColorMap[IMG_MAX_CLR_TBL];
+
+    bool mSkipVoided;
+    bool mEtchVoided;
+    bool mCutVoided;
 };
 
 #endif // CNCROUTINE_H

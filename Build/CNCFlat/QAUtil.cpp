@@ -1,29 +1,32 @@
 #include "QAUtil.h"
-
-bool QAUtil::assertEqual(QString a, QString b)
-{
-    return true;
-}
-bool QAUtil::assertEqual(int a, int b)
-{
-    return true;
-}
-bool QAUtil::assertTrue(bool t)
-{
-    return true;
-}
+#include <stdio.h>
 
 
-void QAUtil::_termOnFail(QString msg)
+QTextStream QAUtil::sStdErr(stderr);
+QTextStream QAUtil::sStdOut(stdout);
+
+void QAUtil::regTestReporter()
+{
+
+}
+void QAUtil::voidTestReporter()
 {
 
 }
 
-void QAUtil::_warnOnFail(QString msg)
+void QAUtil::_termWithMsg(QString msg)
 {
 
 }
-void QAUtil::_stat(QString msg)
+void QAUtil::_promptWithMsg(QString msg)
+{
+
+}
+void QAUtil::_stderr(QString msg)
+{
+
+}
+void QAUtil::_stdout(QString msg)
 {
 
 }
