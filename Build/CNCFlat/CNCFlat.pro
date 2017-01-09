@@ -25,7 +25,7 @@ SOURCES += main.cpp\
     SizeDialog.cpp \
     MessageDialog.cpp \
     QAUtil.cpp \
-    UIUtil.cpp
+    QAFatalException.cpp
 
 HEADERS  += MainWindow.h \
     DisclaimerDialog.h \
@@ -40,7 +40,10 @@ HEADERS  += MainWindow.h \
     CNCConstants.h \
     MessageDialog.h \
     QAUtil.h \
-    ITestReporter.h
+    ITestReporter.h \
+    QAFatalException.h \
+    IQATest.h \
+    IQATester.h
 
 FORMS    += MainWindow.ui \
     DisclaimerDialog.ui \

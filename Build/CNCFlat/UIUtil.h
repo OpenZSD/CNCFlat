@@ -5,6 +5,7 @@
 
 #include <QString>
 #include <QWidget>
+#include "QAUtil.h"
 
 
 class QWidget;
@@ -13,16 +14,17 @@ namespace UIUtil
 {
    using namespace std;
 
-   void errMsgAndTerm(QWidget *root, QString msg);
-
    template <class T> T *findAndAssert(QString id, QWidget *root)
    {
       T *w = root->findChild<T *>(id);
 
       if(!w)
       {
+          //Unit test failure point; only compiles in automated unit tests
+          AUTO_QA_EN(throw QAFatalUIException(id));
+
           //application ends here
-          errMsgAndTerm(root, QString("Missing UI element: ") + id);
+          QAUtil::terminateWithMsg(root, QString("Missing UI element: ") + id);
       }
 
       return w;

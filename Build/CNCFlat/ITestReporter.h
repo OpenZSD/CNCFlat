@@ -1,11 +1,15 @@
 #ifndef ITESTREPORTER_H
 #define ITESTREPORTER_H
+#include <QObject>
 
-class ITestReporter
+//TODO: Fleshout interface
+
+class ITestReporter : public QObject
 {
+    Q_OBJECT
+
 public:
-    ITestReporter() {}
-    virtual void result(bool pass, QString &message, int priorityLvl) = 0;
+    ITestReporter() : QObject() {}
 };
 
 #endif // ITESTREPORTER_H

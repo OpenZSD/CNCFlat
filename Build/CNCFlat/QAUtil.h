@@ -2,8 +2,8 @@
     \brief Macros and functions for general QA and Unit Tests
 
     Macros are designed to allow QA code to be reduced or removed when compiling to release.
-    QA Macros are composed of the following:
-    -reporter: Unit test GUI(or non-gui) implementing IQAReporter reponsible for the execution and reporting of tests
+    QA test macros are composed of the following:
+    -reporter: Unit test GUI(or non-gui) implementing ITestReporter reponsible for the execution and reporting of tests
     -tester: Represents a shared pointer singleton implementing IQATester responsible for a suite of tests
     -test: A shared porter implementing IQATest representing a single test that reports to tester
 */
@@ -12,18 +12,21 @@
 #define QAUTIL_H
 
 #include <QString>
+#include <QWidget>
 #include <QTextStream>
 #include "ITestReporter.h"
 
-//macros are intended to be used, do not directly call static methods
+//macros are intended to be used, do not directly call underscored static methods
 class QAUtil
 {
 public:
     static void regTestReporter();
     static void voidTestReporter();
+    static void terminateWithMsg(QWidget *root, QString msg);
 
+    //TODO: rework macros and helper f() as test framework is refined
+    static void _reportWarning(QString msg);
     static void _reportTest(bool pass, QString msg, int lvl, QString srcPt);
-    static void _termWithMsg(QString msg);
     static void _promptWithMsg(QString msg);
     static void _stderr(QString msg);
     static void _stdout(QString msg);
@@ -36,13 +39,23 @@ private:
 };
 
 /**<GENERAL DEVELOPMENT QA>**/
+
 #ifdef QA_AUTOMATED
-/*! \def AUTO_CHECK(a)
-    \brief Mutes statement \a a durring automated unit tests. This is to avoid dialog messages.*/
-#define AUTO_CHECK(a) {}
+/*! \def AUTO_QA_MUTE(a)
+    \brief Mutes statement \a a durring automated unit tests. This is to avoid UI interaction in automation.*/
+#define AUTO_QA_MUTE(a) {}
 
 #else
-#define AUTO_CHECK(a) a
+#define AUTO_QA_MUTE(a) a
+#endif
+
+#ifdef QA_AUTOMATED
+/*! \def AUTO_QA_EN(a)
+    \brief Enables statement \a a only during automated QA.*/
+#define AUTO_QA_EN(a) a
+
+#else
+#define AUTO_QA_EN(a) {}
 #endif
 
 #ifndef QT_DEBUG //production mode
@@ -74,7 +87,7 @@ private:
     if(!(check))\
     {\
         QAUtil::_stderr(msg);\
-        AUTO_CHECK(QAUtil::_promptWithMsg(msg);)\
+        AUTO_QA_MUTE(QAUtil::_promptWithMsg(msg);)\
     }\
 }
 
