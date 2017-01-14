@@ -1,7 +1,6 @@
 #include "QAUtil.h"
 #include <stdio.h>
 #include <QMessageBox>
-#include "QAFatalException.h"
 
 QTextStream QAUtil::sStdErr(stderr);
 QTextStream QAUtil::sStdOut(stdout);
@@ -16,6 +15,8 @@ void QAUtil::voidTestReporter()
 }
 void QAUtil::terminateWithMsg(QWidget *root, QString msg)
 {
+    QAUtil::_reportWarning(msg);
+
     //Non-automation
     AUTO_QA_MUTE(QMessageBox::critical(root , QString("Critical Application Error"), msg));
     AUTO_QA_MUTE(exit(EXIT_FAILURE));
@@ -26,17 +27,17 @@ void QAUtil::terminateWithMsg(QWidget *root, QString msg)
 
 void QAUtil::_reportWarning(QString msg)
 {
-
+    _stderr(QString("Warn:")+msg);
 }
 void QAUtil::_promptWithMsg(QString msg)
 {
-
+    AUTO_QA_MUTE(QMessageBox::critical(0 , QString("Message"), msg));
 }
 void QAUtil::_stderr(QString msg)
 {
-
+    sStdErr << msg << "\n";
 }
 void QAUtil::_stdout(QString msg)
 {
-
+    sStdOut << msg << "\n";
 }

@@ -20,6 +20,10 @@ public:
     ~MainWindow();
 
     int showMessage(MessageDialog::MessageType type, QStringList args = QStringList()) { return mMsg->show(type, args); }
+    void clearMap() { emit clearText("Empty");  }
+
+signals:
+    void clearText(const QString &);
 
 public slots:
     void generateTemplate();

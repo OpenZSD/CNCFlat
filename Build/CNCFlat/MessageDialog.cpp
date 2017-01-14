@@ -6,6 +6,7 @@
 #include "UIUtil.h"
 #include <QDialogButtonBox>
 #include <QMessageBox>
+#include <QLineEdit>
 #include <stdio.h>
 
 MessageDialog::MessageDialog(QWidget *parent) :
@@ -44,6 +45,8 @@ void MessageDialog::populateBox(MessageType box)
     switch(box)
     {
     case ErrFileAccess:
+        mFileErr.setupUi(UIUtil::findAndAssert<QWidget>("uiWCanvas", mBase));
+        this->setFixedSize(300, 135);
         break;
     case ErrPalletConflict:
         break;
@@ -72,6 +75,8 @@ void MessageDialog::fillFields(MessageType type, QStringList &args)
     switch(type)
     {
     case ErrFileAccess:
+        QA_CRIT((args.length()==1), "Error; MessageDialog: expect 1 argument, [File Path]", "MessageDialog.cpp", 78);
+        UIUtil::findAndAssert<QLineEdit>("uiLEFilePath", mBase)->setText(args[0]);
         mBtns->addButton(QDialogButtonBox::Ok);
         break;
     case ErrPalletConflict:
@@ -100,5 +105,4 @@ void MessageDialog::fillFields(MessageType type, QStringList &args)
         mBtns->addButton(QDialogButtonBox::Ok);
         break;
     }
-
 }

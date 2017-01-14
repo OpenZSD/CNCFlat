@@ -13,7 +13,7 @@ public:
     QString mMsg;
 };
 
-class QAFatalUIException: public QAFatalException
+class QAFatalUIException : public QAFatalException
 {
     QAFatalUIException(QString uiName);
 };

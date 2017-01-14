@@ -21,8 +21,8 @@ QImage TemplateMaker::genImg(unsigned long w, unsigned h)
     table[0] = qRgb(0,0,0); //void1 (background)
     table[1] = qRgb(255,255,255); //void2
     table[2] = qRgb(100,100,100); //void3
-    table[3] = qRgb(0,0,0); //void4
-    table[4] = qRgb(255,0,0); //avoid
+    table[3] = qRgb(155,155,155); //void4
+    table[4] = qRgb(255,255,0); //avoid
     table[5] = qRgb(0,255,0); //start
     table[6] = qRgb(255,0,255); //etch
     table[7] = qRgb(0,0,255); //cut
@@ -30,10 +30,15 @@ QImage TemplateMaker::genImg(unsigned long w, unsigned h)
     tmpl.setColorTable(table);
 
     paint.fillRect(0,0,w,h, QColor(table[0]));
+
+    QFont f = QFont("Liberation Serif");
+    f.setStyleStrategy(QFont::NoAntialias);
+    paint.setFont(f);
     for(int i = 0; i < IMG_MAX_CLR_TBL; i++)
     {
         paint.fillRect(x,0,64,16, QColor(table[i]));
-        paint.setPen(QColor(table[1]));
+        paint.setPen(QPen(QColor(table[1])));
+        paint.setBrush(QBrush(QColor(table[1])));
         paint.drawText(x, 16, 64, 16, al, labels[i]);
         x+=64;
     }

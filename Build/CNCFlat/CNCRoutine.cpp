@@ -5,13 +5,14 @@
 #include "SizeDialog.h"
 #include "TemplateMaker.h"
 #include "MessageDialog.h"
+#include "QAUtil.h"
 #include <QImage>
 #include <QFileDialog>
 #include <stdio.h>
 
 
 CNCRoutine::CNCRoutine(MainWindow *mainWindow)
-    :QObject(), mMainWindow(mainWindow)
+    :QObject(), mMainWindow(mainWindow), mImgLoaded(true)
 {
     mMD = new MessageDialog(mainWindow);
 }
@@ -45,51 +46,58 @@ void CNCRoutine::loadImg()
 {
     QString path;
     QImage img;
+    QStringList args;
 
     path = QFileDialog::getOpenFileName(mMainWindow, tr("Select CNC Image"), "./", "*.bmp");
 
     if(!path.isNull())
     {
+        wipeContent(); //wipe former content in advance of any failure
+
         img = QImage(path, "bmp");
 
         if(img.isNull())
         {
-            mMD->show(MessageDialog::ErrFileAccess);
+            args += path;
+            mMD->show(MessageDialog::ErrFileAccess, args);
         }
         //check format
         else if((img.colorCount() < IMG_MIN_CLR_TBL) || (img.colorCount() > IMG_MAX_CLR_TBL) //color table check
-             || (img.width() >= MIN_TEMPLATE_WIDTH) || (img.height() > MIN_NET_T_HEIGHT)) //size check
+             || (img.width() < MIN_TEMPLATE_WIDTH) || (img.height() < MIN_NET_T_HEIGHT)) //size check
         {
             mMD->show(MessageDialog::ErrFormat);
         }
         else
         {
-            printf("GOOD FORMAT\n");
+            //check color map
+            loadColorTable(img);
+            if(checkColorTable())
+            {
+                //check center
+                if(getCenter(img, mCenter))
+                {
+                    QPixmap m;
+                    m.convertFromImage(img);
+                    emit setPixmap(m);
+
+                    mImgLoaded = true;
+                }
+            }
         }
     }
 }
 
 void CNCRoutine::loadColorTable(QImage &img)
 {
-/*
-#define IMG_VOID_IDX_HEAD 0
-#define IMG_VOID_IDX_TAIL 3
-#define IMG_CUT_IDX 4
-#define IMG_ETCH_IDX 5
-#define IMG_SKIP_IDX 6
-#define IMG_CENTER_IDX 7
-#define IMG_CUT_POS 480
-#define IMG_ETCH_POS 416
-#define IMG_SKIP_POS 288
-#define IMG_CENTER_POS 352
-#define IMG_VOID_CTR_POS 32
-#define IMG_H_DELTA_POS 64
-#define IMG_V_SMPLE_POS 16
+    for(int i = IMG_VOID_IDX_HEAD; i <= IMG_VOID_IDX_TAIL; i++)
+    {
+        mColorMap[i] = QColor(img.pixel(IMG_VOID_CTR_POS+(IMG_H_DELTA_POS*i), IMG_V_SMPLE_POS));
+    }
 
-    bool mSkipVoided;
-    bool mEtchVoided;
-    bool mCutVoided;
-*/
+    mColorMap[IMG_CUT_IDX] = QColor(img.pixel(IMG_ETCH_POS, IMG_V_SMPLE_POS));
+    mColorMap[IMG_ETCH_IDX] = QColor(img.pixel(IMG_ETCH_POS, IMG_V_SMPLE_POS));
+    mColorMap[IMG_SKIP_IDX] = QColor(img.pixel(IMG_SKIP_POS, IMG_V_SMPLE_POS));
+    mColorMap[IMG_CENTER_IDX] = QColor(img.pixel(IMG_CENTER_POS, IMG_V_SMPLE_POS));
 }
 
 bool CNCRoutine::checkColorTable()
@@ -108,8 +116,11 @@ bool CNCRoutine::checkColorTable()
         return voided;
     };
 
+    //TODO: refactor in unit test markers
+
     //check non-voided center
     pass &= !voidCheck(IMG_CENTER_IDX);
+    QA_WARN(pass, "Can not have starting marker voided.");
     //check if either cut or etch in non-voided (can't void both)
     pass &= ((!(mEtchVoided = voidCheck(IMG_ETCH_IDX)))
           || (!(mCutVoided = voidCheck(IMG_CUT_IDX))));
@@ -117,12 +128,57 @@ bool CNCRoutine::checkColorTable()
     //mark if skip is voided
     mSkipVoided = voidCheck(IMG_SKIP_IDX);
 
+    QA_WARN((!mEtchVoided||!mCutVoided), "Can not have both cut and etch voided in BMP.");
+
     return pass;
 }
 
 bool CNCRoutine::getCenter(QImage &img, FlatPt &center)
 {
-    return false;
+    int minX, minY, maxX, maxY;
+    maxX = 0;
+    maxY = TEMPLATE_KEY_HEIGHT;
+    minX = img.width();
+    minY = img.height();
+    bool accepted;
+
+    for(int x = 0; x < img.width(); x++)
+    {
+        for(int y = TEMPLATE_KEY_HEIGHT; y < img.height(); y++)
+        {
+            if(QColor(img.pixel(x, y)) == mColorMap[IMG_CENTER_IDX])
+            {
+                maxX = maxX < x ? x : maxX;
+                maxY = maxY < y ? y : maxY;
+                minX = minX > x ? x : minX;
+                minY = minY > y ? y : minY;
+            }
+        }
+    }
+
+    if((minX == maxX) && (minY == maxY))
+    {
+        accepted = true;
+    }
+    else
+    {
+        accepted = (QDialog::Accepted == mMD->show(MessageDialog::WrnCenterConflict));
+    }
+
+    center.x = (minX+maxX)/2;
+    center.y = (minY+maxY)/2;
+    return accepted;
+}
+
+void CNCRoutine::generateRouteMap(QImage &img)
+{
+
+}
+
+void CNCRoutine::wipeContent()
+{
+    mImgLoaded = false;
+    mMainWindow->clearMap();
 }
 
 void CNCRoutine::setAxis(unsigned int x, unsigned int y, unsigned int z, bool invX, bool invY, bool invZ)

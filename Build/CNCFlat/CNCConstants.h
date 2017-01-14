@@ -19,6 +19,6 @@
 #define IMG_CENTER_POS 352
 #define IMG_VOID_CTR_POS 32
 #define IMG_H_DELTA_POS 64
-#define IMG_V_SMPLE_POS 16
+#define IMG_V_SMPLE_POS 8
 
 #endif // CNCCONSTANTS_H

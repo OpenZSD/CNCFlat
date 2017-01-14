@@ -15,6 +15,7 @@
 #include <QWidget>
 #include <QTextStream>
 #include "ITestReporter.h"
+#include "QAFatalException.h"
 
 //macros are intended to be used, do not directly call underscored static methods
 class QAUtil
@@ -64,7 +65,7 @@ private:
 {\
     if(!(check))\
     {\
-        QAUtil::_stderr(msg);\
+        QAUtil::_reportWarning(msg);\
     }\
 }
 #define QA_TEST(pass, msg, lvl, srcPt) QA_WARN(pass,msg) //becomes another warning in production
@@ -86,19 +87,20 @@ private:
 {\
     if(!(check))\
     {\
-        QAUtil::_stderr(msg);\
+        QAUtil::_reportWarning(msg);\
         AUTO_QA_MUTE(QAUtil::_promptWithMsg(msg);)\
     }\
 }
 
 #endif
 
-#define QA_CRIT(f, m)\
+#define QA_CRIT(check, msg, fname, ln)\
 {\
-    if(!f)\
+    if(!check)\
     {\
+        AUTO_QA_EN(throw QAFatalException(fname, ln, msg));\
         QAUtil::_stderr(msg);\
-        QAUtil::_termOnFail(m);\
+        QAUtil::terminateWithMsg(0, msg);\
     }\
 }
 
