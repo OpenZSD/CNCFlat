@@ -21,4 +21,6 @@
 #define IMG_H_DELTA_POS 64
 #define IMG_V_SMPLE_POS 8
 
+#define THREAD_DIST 4;
+
 #endif // CNCCONSTANTS_H

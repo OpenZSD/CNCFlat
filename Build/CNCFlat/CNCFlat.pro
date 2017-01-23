@@ -25,7 +25,11 @@ SOURCES += main.cpp\
     SizeDialog.cpp \
     MessageDialog.cpp \
     QAUtil.cpp \
-    QAFatalException.cpp
+    QAFatalException.cpp \
+    CuttingMask.cpp \
+    CuttingRow.cpp \
+    SerialDialog.cpp \
+    SerialIOCom.cpp
 
 HEADERS  += MainWindow.h \
     DisclaimerDialog.h \
@@ -43,7 +47,12 @@ HEADERS  += MainWindow.h \
     ITestReporter.h \
     QAFatalException.h \
     IQATest.h \
-    IQATester.h
+    IQATester.h \
+    CuttingMask.h \
+    CuttingRow.h \
+    CNCTypes.h \
+    SerialDialog.h \
+    SerialIOCom.h
 
 FORMS    += MainWindow.ui \
     DisclaimerDialog.ui \
@@ -54,7 +63,8 @@ FORMS    += MainWindow.ui \
     MessageDialog.ui \
     MDIFileErr.ui \
     MDIFormatErr.ui \
-    MDICenterWrn.ui
+    MDICenterWrn.ui \
+    SerialDialog.ui
 
 RESOURCES += \
     ImgRes.qrc

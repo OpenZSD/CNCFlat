@@ -6,6 +6,7 @@
 #include <QImage>
 #include <QColor>
 #include "CNCConstants.h"
+#include "CNCTypes.h"
 
 class MainWindow;
 class MessageDialog;
@@ -13,13 +14,6 @@ class MessageDialog;
 class CNCRoutine : public QObject
 {
     Q_OBJECT
-
-protected:
-    struct FlatPt
-    {
-        float x;
-        float y;
-    };
 
 public:
     CNCRoutine(MainWindow *mainWindow);
