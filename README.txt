@@ -1,4 +1,6 @@
-Work in progress...
+THIS PROJECT HAS BEEN ABANDONED. This project may or may not be revisited.
+
+
 Linux based CNC program for GRBL based systems.
 
 Author: Jerry Z.
